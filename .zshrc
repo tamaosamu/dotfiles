@@ -1,59 +1,67 @@
-ZPLUGINDIR=$HOME/.zsh/plugins
-
-# if you want to use unplugged, you can copy/paste plugin-clone here, or just pull the repo
-if [[ ! -d $ZPLUGINDIR/zsh_unplugged ]]; then
-    echo "Cloning mattmc3/zsh_unplugged"
-    git clone https://github.com/mattmc3/zsh_unplugged $ZPLUGINDIR/zsh_unplugged --quiet
-fi
-source $ZPLUGINDIR/zsh_unplugged/zsh_unplugged.zsh
-
-export PATH="/usr/local/sbin:$PATH"
-
-### Basic config
-
-autoload -U compinit
-compinit
-
-plugins=(
-    # plugins that you want loaded first theme
-    sindresorhus/pure
-
-    # use zsh-defer magic to load the remaining plugins at hypersonic speed!
-    romkatv/zsh-defer
-
-    # core plugins
-    zsh-users/zsh-autosuggestions
-    zsh-users/zsh-history-substring-search
-    zsh-users/zsh-completions
-
-    # user plugins
-    rupa/z
-    #hlissner/zsh-autopair
-    djui/alias-tips
-    peterhurford/up.zsh
-
-    # load this one last
-    zsh-users/zsh-syntax-highlighting
-
-)
-
-# clone, source, and add to fpath
-plugin-load $plugins
-
-# Prettify ls
-if (( $+commands[gls] )); then
-    alias ls='gls --color=tty --group-directories-first'
-else
-    alias ls='ls --color=tty'
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-alias ll='ls -l'
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+zinit ice depth"1"
+zinit light romkatv/powerlevel10k
+
+
+# 快速目录跳转
+zinit ice lucid wait='1'
+zinit light rupa/z
+#zinit light skywind3000/z.lua
+
+# 补全
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+# zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+zinit light djui/alias-tips
+zinit light peterhurford/up.zsh
+
+# 别名
 alias j="z"
+alias ls='ls --color=tty'
+alias ll='ls -l'
+# Python ==============
+alias py="python3"
+alias pip="pip3"
+alias da="django-admin"
+# =====================
 
-# nodejs config
+# nodejs
 export PATH="/usr/local/opt/node@18/bin:$PATH"
 
-# go config
+# Golang
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH="$HOME/Sites/Golang"
 export PATH="$GOPATH/bin:$PATH"
@@ -61,14 +69,14 @@ export PATH="$GOPATH/bin:$PATH"
 # JAVA
 JAVA_HOME_17=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
 JAVA_HOME=$JAVA_HOME_17
-
 alias java17="export JAVA_HOME=$JAVA_HOME_17"
-
-# Python
-alias py="python3"
-alias pip="pip3"
-alias da="django-admin"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# postgreSQL
 export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
