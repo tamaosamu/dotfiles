@@ -11,7 +11,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -28,84 +27,80 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-   zdharma-continuum/zinit-annex-as-monitor \
-   zdharma-continuum/zinit-annex-bin-gem-node \
-   zdharma-continuum/zinit-annex-patch-dl \
-   zdharma-continuum/zinit-annex-rust
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
 
+## load powerlevel10k
 zinit ice depth"1"
 zinit light romkatv/powerlevel10k
 
-# load zsh
+## oh-my-zsh
+zi snippet OMZL::git.zsh
+zi snippet OMZP::z
+zi snippet OMZP::git
+zi snippet OMZP::vscode
+zi snippet OMZP::colored-man-pages
 
-
-# 快速目录跳转
-zinit ice lucid wait='1'
-zinit light rupa/z
-#zinit light skywind3000/z.lua
-
-# 补全
+## plugins
+# 入力補完/输入补全/input
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
-# Command Highlight
-# 命令高亮
-# コマンド強調表示（きょうちょうひょうじ）
-# zinit light zsh-users/zsh-syntax-highlighting
+# コマンド強調表示（きょうちょうひょうじ）/代码高亮/syntax highlight 
 zinit light zdharma-continuum/fast-syntax-highlighting
-# URL: https://github.com/peterhurford/up.zsh
-zinit light peterhurford/up.zsh
-# URL: https://github.com/djui/alias-tips
-zinit light djui/alias-tips
-
-# =====================
-# ENV
-# 环境变量
-# 環境変数
-# ---------------------
-# nodejs
-# ノード
-export PATH="/usr/local/opt/node@18/bin:$PATH"
-# ---------------------
-# Golang
-# ゴラン
-# ---------------------
-export GOROOT=/usr/local/opt/go/libexec
-export GOPATH="$HOME/Sites/Golang"
-export PATH="$GOPATH/bin:$PATH"
-# ---------------------
-# JAVA
-# ジャワ
-# ---------------------
-JAVA_HOME_17=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
-JAVA_HOME=$JAVA_HOME_17
-export JAVA_HOME
-#======================
-# postgreSQL
-export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
-# Load Angular CLI autocompletion.
-#source <(ng completion script)
+# コマンド履歴を検索/历史命令搜索/search command history
+zinit light zdharma/history-search-multi-word
 
 
-# =====================
-# alias
-# 别名
-# エイリアス
-# ---------------------
-alias j="z"
-alias ls='ls --color=tty'
-alias ll='ls -l'
-alias la='ls -a'
-alias lt='ls --tree'
-# Python ==============
-alias py="python3"
-alias pip="pip3"
-alias da="django-admin"
-alias java17="export JAVA_HOME=$JAVA_HOME_17"
-# =====================
+## alias / 别名 / エイリアス
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zshrc"
+alias zshrc-r="source ~/.zshrc"
+# ls
+alias ls="ls --color=tty"
+alias ll="ls -l"
+alias la="ll -a"
+alias lt="ls --tree"
 
+# man zh
+alias cman="man -M /usr/local/share/man/zh_CN"
+
+# zh-CN
+export LANG=zh_CN.UTF-8
+# path
+export PATH="/usr/local/sbin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# =====================
+# ENV/环境变量/環境変数
+# ---------------------
+# nodejs / ノード
+# export PATH="/usr/local/opt/node@18/bin:$PATH"
+# ---------------------
+# Golang / ゴラン
+# ---------------------
+# export GOROOT=/usr/local/opt/go/libexec
+# export GOPATH="$HOME/Sites/Golang"
+# export PATH="$GOPATH/bin:$PATH"
+# ---------------------
+# JAVA / ジャワ
+# ---------------------
+# JAVA_HOME_17=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
+# JAVA_HOME=$JAVA_HOME_17
+# export JAVA_HOME
+# ---------------------
+# Python
+# ---------------------
+#
+# ---------------------
+# postgreSQL
+# ---------------------
+# export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+# ---------------------
+#======================
