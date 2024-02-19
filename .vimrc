@@ -1,1 +1,0 @@
-/Users/devine/.vim/vimrc
