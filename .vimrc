@@ -39,12 +39,8 @@ colorscheme gruvbox
 set background=light
 " 启用256色
 set t_Co=256
-
-" 开启True-Color
-if has("termguicolors")
-    " enable true color
-    set termguicolors
-endif
+" 启用真彩色
+set termguicolors
 
 " 行番号を表示
 set number
