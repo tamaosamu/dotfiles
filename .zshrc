@@ -97,7 +97,11 @@ export PATH="/usr/local/sbin:$PATH"
 # ---------------------
 # Python
 # ---------------------
-#
+# Controls the version of Python
+# パイソンのバージョンに制御する
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 # ---------------------
 # postgreSQL
 # ---------------------

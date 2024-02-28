@@ -1,6 +1,7 @@
 call plug#begin()
   Plug 'preservim/nerdtree'
   Plug 'preservim/nerdcommenter'
+  Plug 'morhetz/gruvbox'
 call plug#end()
 
 """""""""""
@@ -33,9 +34,17 @@ syntax on
 " Vim UI
 """""""""""""""""
 " color scheme
-set background=dark
+colorscheme gruvbox
+"set background=dark
+set background=light
 " 启用256色
 set t_Co=256
+
+" 开启True-Color
+if has("termguicolors")
+    " enable true color
+    set termguicolors
+endif
 
 " 行番号を表示
 set number
