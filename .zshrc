@@ -91,9 +91,8 @@ export PATH="/usr/local/sbin:$PATH"
 # ---------------------
 # JAVA / ジャワ
 # ---------------------
-# JAVA_HOME_17=/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
-# JAVA_HOME=$JAVA_HOME_17
-# export JAVA_HOME
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 # ---------------------
 # Python
 # ---------------------
