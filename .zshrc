@@ -78,6 +78,12 @@ export LANG=zh_CN.UTF-8
 # =====================
 # ENV/环境变量/環境変数
 # ---------------------
+# Homebrew
+# ---------------------
+# 关闭自动清理旧版本包（不建议使用）
+# export HOMEBREW_NO_INSTALL_CLEANUP=true
+# 隐藏提示（建议使用）
+export HOMEBREW_NO_ENV_HINTS=true
 # nodejs / ノード
 # export PATH="/usr/local/opt/node@18/bin:$PATH"
 # NVM
