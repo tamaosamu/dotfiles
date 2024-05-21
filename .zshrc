@@ -84,7 +84,9 @@ export LANG=zh_CN.UTF-8
 # export HOMEBREW_NO_INSTALL_CLEANUP=true
 # 隐藏提示（建议使用）
 export HOMEBREW_NO_ENV_HINTS=true
+# ---------------------
 # nodejs / ノード
+# ---------------------
 # export PATH="/usr/local/opt/node@18/bin:$PATH"
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -99,11 +101,15 @@ export NVM_DIR="$HOME/.nvm"
 # ---------------------
 # JAVA / ジャワ
 # ---------------------
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+export JENV_PATH="$HOME/.jenv"
+if [ -d "${JENV_PATH}" ]; then
+  export PATH="$JENV_PATH/bin:$PATH"
+  eval "$(jenv init -)"
+fi
 # ---------------------
 # Python
 # ---------------------
+# python版本控制器
 # Controls the version of Python
 # パイソンのバージョンに制御する
 export PYENV_ROOT="$HOME/.pyenv"
