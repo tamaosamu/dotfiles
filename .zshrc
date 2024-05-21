@@ -71,8 +71,6 @@ alias cman="man -M /usr/local/share/man/zh_CN"
 
 # zh-CN
 export LANG=zh_CN.UTF-8
-# path
-export PATH="/usr/local/sbin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -111,3 +109,4 @@ eval "$(pyenv init -)"
 # export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
 # ---------------------
 #======================
+export PATH="/usr/local/sbin:$PATH"
