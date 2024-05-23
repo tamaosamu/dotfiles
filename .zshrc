@@ -65,6 +65,8 @@ alias ls="ls --color=tty"
 alias ll="ls -l"
 alias la="ll -a"
 alias lt="ls --tree"
+## 卸载别名，与g多版本命令冲突
+unalias g
 
 # man zh
 alias cman="man -M /usr/local/share/man/zh_CN"
@@ -90,11 +92,17 @@ export HOMEBREW_NO_ENV_HINTS=true
 # export PATH="/usr/local/opt/node@18/bin:$PATH"
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+# This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 # ---------------------
 # Golang / ゴラン
 # ---------------------
+export G_PATH="${HOME}/.g"
+if [ -f "${G_PATH}/env" ]; then
+  . "${G_PATH}/env"
+fi  
 # export GOROOT=/usr/local/opt/go/libexec
 # export GOPATH="$HOME/Sites/Golang"
 # export PATH="$GOPATH/bin:$PATH"
@@ -122,3 +130,6 @@ eval "$(pyenv init -)"
 # ---------------------
 #======================
 export PATH="/usr/local/sbin:$PATH"
+
+[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
+
