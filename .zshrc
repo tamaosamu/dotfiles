@@ -46,15 +46,14 @@ zi snippet OMZP::vscode
 zi snippet OMZP::colored-man-pages
 
 ## plugins
-# 入力補完/输入补全/input
+# 入力補完 / 输入补全 / input
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
-# コマンド強調表示（きょうちょうひょうじ）/代码高亮/syntax highlight 
+# コマンド強調表示（きょうちょうひょうじ） / 代码高亮 / syntax highlight 
 zinit light zdharma-continuum/fast-syntax-highlighting
 # コマンド履歴を検索/历史命令搜索/search command history
 zinit light zdharma/history-search-multi-word
-
 
 ## alias / 别名 / エイリアス
 alias vimrc="vim ~/.vimrc"
@@ -65,7 +64,7 @@ alias ls="ls --color=tty"
 alias ll="ls -l"
 alias la="ll -a"
 alias lt="ls --tree"
-## 卸载别名，与g多版本命令冲突
+## 卸载别名，与golang(g)多版本命令冲突
 unalias g
 
 # man zh
@@ -87,10 +86,33 @@ export LANG=zh_CN.UTF-8
 # 隐藏提示（建议使用）
 export HOMEBREW_NO_ENV_HINTS=true
 # ---------------------
+# PHP
+# ---------------------
+# PHPBrew
+## --------------------
+export PHPBREW_PATH="$HOME/.phpbrew"
+if [ -f "${PHPBREW_PATH}/bashrc" ]; then
+  # PHPBrew 会在你的 shell 提示符中显示当前使用的 PHP 版本。
+  export PHPBREW_SET_PROMPT=1
+  # PHPBrew 会在每个目录中查找并加载 .phpbrewrc 文件
+  export PHPBREW_RC_ENABLE=1
+  source "${PHPBREW_PATH}/bashrc"
+fi
+## --------------------
+# brew php
+## --------------------
+export PHP_PATH="/usr/local/opt/php"
+if [ -d "$PHP_PATH" ]; then
+  export PATH="$PHP_PATH/bin:$PATH"
+  export PATH="$PHP_PATH/sbin:$PATH"
+  export LDFLAGS="-L$PHP_PATH/lib"
+  export CPPFLAGS="-I$PHP_PATH/include"
+fi
+# ---------------------
 # nodejs / ノード
 # ---------------------
-# export PATH="/usr/local/opt/node@18/bin:$PATH"
-# NVM
+## NVM
+## --------------------
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
@@ -115,21 +137,15 @@ if [ -d "${JENV_PATH}" ]; then
   eval "$(jenv init -)"
 fi
 # ---------------------
-# Python
+# Python / バイソン
 # ---------------------
 # python版本控制器
 # Controls the version of Python
 # パイソンのバージョンに制御する
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# ---------------------
-# postgreSQL
-# ---------------------
-# export PATH="/usr/local/opt/postgresql@16/bin:$PATH"
-# ---------------------
+if [ -d $PYENV_ROOT/bin ]; then 
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 #======================
 export PATH="/usr/local/sbin:$PATH"
-
-[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
-
