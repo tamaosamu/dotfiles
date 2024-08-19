@@ -65,8 +65,8 @@ alias ll="ls -l"
 alias la="ll -a"
 alias lt="ls --tree"
 alias j="z"
-## 卸载别名，与golang(g)多版本命令冲突
-unalias g
+# golang多版本控制
+alias goenv="~/.g/bin/g"
 
 # man zh
 alias cman="man -M /usr/local/share/man/zh_CN"
@@ -122,13 +122,11 @@ export NVM_DIR="$HOME/.nvm"
 # ---------------------
 # Golang / ゴラン
 # ---------------------
-export G_PATH="${HOME}/.g"
+export G_PATH="$HOME/.g"
 if [ -f "${G_PATH}/env" ]; then
   . "${G_PATH}/env"
-fi  
-# export GOROOT=/usr/local/opt/go/libexec
-# export GOPATH="$HOME/Sites/Golang"
-# export PATH="$GOPATH/bin:$PATH"
+fi
+
 # ---------------------
 # JAVA / ジャワ
 # ---------------------
@@ -177,4 +175,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+#[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
 
