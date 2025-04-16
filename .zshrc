@@ -55,6 +55,8 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 # コマンド履歴を検索/历史命令搜索/search command history
 zinit light zdharma/history-search-multi-word
 
+unalias g
+
 ## alias / 别名 / エイリアス
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
@@ -148,6 +150,7 @@ if [ -d $PYENV_ROOT/bin ]; then
 fi
 #======================
 export PATH="/usr/local/sbin:$PATH"
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 export MAMBA_EXE='/Users/tamaosamu/.micromamba/bin/micromamba';
@@ -176,6 +179,12 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# pnpm
+export PNPM_HOME="/Users/tamaosamu/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
-#[ -s "${HOME}/.g/env" ] && \. "${HOME}/.g/env"  # g shell setup
-
+export PATH="/usr/local/bin:$PATH"
