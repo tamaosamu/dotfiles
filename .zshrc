@@ -129,6 +129,8 @@ if [ -f "${G_PATH}/env" ]; then
   . "${G_PATH}/env"
 fi
 
+export GOPATH="$G_PATH"
+export PATH="$GOPATH/bin:$PATH"
 # ---------------------
 # JAVA / ジャワ
 # ---------------------
@@ -186,5 +188,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-export PATH="/usr/local/bin:$PATH"
