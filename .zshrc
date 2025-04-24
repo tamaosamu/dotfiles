@@ -145,11 +145,13 @@ fi
 # python版本控制器
 # Controls the version of Python
 # パイソンのバージョンに制御する
-export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT=$(brew --prefix pyenv)
 if [ -d $PYENV_ROOT/bin ]; then 
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
+# poetry
+export PATH="$HOME/.local/bin:$PATH"
 #======================
 export PATH="/usr/local/sbin:$PATH"
 
@@ -188,3 +190,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
