@@ -153,7 +153,6 @@ fi
 # poetry
 export PATH="$HOME/.local/bin:$PATH"
 #======================
-export PATH="/usr/local/sbin:$PATH"
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
